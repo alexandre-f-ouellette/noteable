@@ -1,33 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
+<div class="container not-full-width">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Projects</h1>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Short name</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row projects-padding">
+    <div class="col-md-4 text-left">
+      <%= link_to new_project_path, :class => "btn btn-info btn-md" do %>
+        <span class="glyphicon glyphicon-plus-sign"></span> New project
+      <% end %>
+    </div>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.short_name %></td>
-        <td><%= project.start_date %></td>
-        <td><%= project.end_date %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="col-md-4 text-center">
+      <% if will_paginate @projects %>
+        <div class="apple-pagination">
+          <%= will_paginate @projects %>
+        </div>
+      <% end %>
+    </div>
 
-<br>
+    <div class="col-md-4 text-right">
+      <p>Placeholder for project order</p>
+    </div>
+  </div>
 
-<%= link_to 'New Project', new_project_path %>
+  <div class="row projects-list projects-padding">
+    <%= render @projects %>
+  </div>
+</div>

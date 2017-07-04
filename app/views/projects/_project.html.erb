@@ -1,0 +1,33 @@
+<div class="col-md-4 project-details">
+  <h2 class="text-center">
+    <%= link_to project.name, project %>
+  </h2>
+
+  <div class="col-md-4">
+    <strong>Short Name: </strong>
+    <p>
+      <%= project.short_name %>
+    </p>
+  </div>
+
+  <div class="col-md-4">
+    <strong>Start Date: </strong>
+    <p>
+      <%= project.start_date %>
+    </p>
+  </div>
+
+  <div class="col-md-4">
+    <strong>End Date: </strong>
+    <p>
+      <%= project.end_date %>
+    </p>
+  </div>
+
+  <div class="col-md-12">
+    <strong>Description: </strong>
+    <p>
+      <%= project.description %>
+    </p>
+  </div>
+</div>
