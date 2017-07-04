@@ -10,7 +10,65 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require tether
  */
 
-@import 'bootstrap';
+/**** Navigation ****/
+.navbar {
+  background-color: #607D8B
+;
+  width: 100%;
+}
+
+.navbar-brand {
+  padding: 15px 0 0 20px;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.nav li a {
+  padding-left: 2em;
+}
+
+.navbar-header button span {
+  background-color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  background-color: #607D8B;
+}
+
+.navbar-toggle {
+  background-color: white;
+}
+
+
+/* Typography */
+
+.navbar-default .navbar-nav > li > a {
+  font-size: 1em;
+  font-family: "Droid Sans", Helvetica, Arial, sans-serif;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #B0BEC5;
+}
+
+.navbar-form {
+  margin: 15px 15px 0px 15px;
+}
+
+.navbar-form label {
+  color: white;
+  font-weight: normal;
+}
+
+
+
+body {
+  padding-top: 50px;
+}
