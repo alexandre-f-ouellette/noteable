@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-datepicker3
  */
 
 /**** Navigation ****/
@@ -90,4 +91,9 @@ body {
 
 .not-full-width {
   width: 95%;
+}
+
+label.required:after {
+  content: " *";
+  color: red;
 }

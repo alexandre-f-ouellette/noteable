@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'will_paginate'
 
+gem 'bootstrap-datepicker-rails'
+
 gem 'friendly_id'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
