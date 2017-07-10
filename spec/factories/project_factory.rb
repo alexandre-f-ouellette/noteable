@@ -1,9 +1,10 @@
 FactoryGirl.define do
   sequence(:name) { |n| "Product ##{n}" }
+  sequence(:short_name) { |n| "proj#{n}"}
 
   factory :project_valid, class: Project do
     name
-    short_name "proj1"
+    short_name
     start_date Date.new()
     end_date Date.new(2027,11,11)
     description "This is a description"

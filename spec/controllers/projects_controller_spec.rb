@@ -25,34 +25,36 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Project. As you add validations to Project, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ProjectsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let!(:valid_project) { FactoryGirl.create(:project_valid) }
+  let(:valid_project_attr) { FactoryGirl.build(:project_valid).attributes.symbolize_keys }
+  let(:invalid_project) { FactoryGirl.build(:project_no_name) }
+
   describe "GET #index" do
     it "returns a success response" do
-      project = Project.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+
+    it "contains valid project" do
+      get :index, params: {}, session: valid_session
+      expect(assigns(:projects)).to include(valid_project)
+    end
+
+    it "does not contain invalid project" do
+      get :index, params: {}, session: valid_session
+      expect(assigns(:projects)).not_to include(invalid_project)
     end
   end
 
   describe "GET #show" do
     it "returns a success response" do
-      project = Project.create! valid_attributes
-      get :show, params: {id: project.to_param}, session: valid_session
+      get :show, params: {id: valid_project.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
@@ -66,8 +68,7 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
-      project = Project.create! valid_attributes
-      get :edit, params: {id: project.to_param}, session: valid_session
+      get :edit, params: {id: valid_project.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
@@ -76,19 +77,19 @@ RSpec.describe ProjectsController, type: :controller do
     context "with valid params" do
       it "creates a new Project" do
         expect {
-          post :create, params: {project: valid_attributes}, session: valid_session
+          post :create, params: { project: valid_project_attr }, session: valid_session
         }.to change(Project, :count).by(1)
       end
 
       it "redirects to the created project" do
-        post :create, params: {project: valid_attributes}, session: valid_session
+        post :create, params: { project: valid_project_attr }, session: valid_session
         expect(response).to redirect_to(Project.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {project: invalid_attributes}, session: valid_session
+        post :create, params: {project: invalid_project.attributes}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -97,27 +98,27 @@ RSpec.describe ProjectsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "This is a new name" }
       }
 
       it "updates the requested project" do
-        project = Project.create! valid_attributes
-        put :update, params: {id: project.to_param, project: new_attributes}, session: valid_session
-        project.reload
-        skip("Add assertions for updated state")
+        put :update, params: {id: valid_project.to_param, project: new_attributes}, session: valid_session
+        expect(valid_project.reload.name).to eq("This is a new name")
       end
 
       it "redirects to the project" do
-        project = Project.create! valid_attributes
-        put :update, params: {id: project.to_param, project: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(project)
+        put :update, params: {id: valid_project.to_param, project: new_attributes}, session: valid_session
+        expect(response).to redirect_to(valid_project)
       end
     end
 
     context "with invalid params" do
+      let(:invalid_new_attributes) {
+        { name: nil }
+      }
+
       it "returns a success response (i.e. to display the 'edit' template)" do
-        project = Project.create! valid_attributes
-        put :update, params: {id: project.to_param, project: invalid_attributes}, session: valid_session
+        put :update, params: {id: valid_project.to_param, project: invalid_new_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -125,15 +126,13 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested project" do
-      project = Project.create! valid_attributes
       expect {
-        delete :destroy, params: {id: project.to_param}, session: valid_session
+        delete :destroy, params: {id: valid_project.to_param}, session: valid_session
       }.to change(Project, :count).by(-1)
     end
 
     it "redirects to the projects list" do
-      project = Project.create! valid_attributes
-      delete :destroy, params: {id: project.to_param}, session: valid_session
+      delete :destroy, params: {id: valid_project.to_param}, session: valid_session
       expect(response).to redirect_to(projects_url)
     end
   end
