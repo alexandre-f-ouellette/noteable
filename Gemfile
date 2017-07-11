@@ -29,6 +29,8 @@ gem 'will_paginate'
 gem 'bootstrap-datepicker-rails'
 
 gem 'friendly_id'
+
+gem 'ransack'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
