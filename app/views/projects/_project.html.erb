@@ -3,21 +3,32 @@
     <%= link_to project.name, project %>
   </h2>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
+    <strong>Status: </strong>
+    <p>
+      <% if project.completed? %>
+        <span class="glyphicon glyphicon-ok status-complete" aria-hidden="true"> Completed</span>
+      <% else %>
+        <span class="glyphicon glyphicon-remove status-incomplete" aria-hidden="true"> Incomplete</span>
+      <% end %>
+    </p>
+  </div>
+
+  <div class="col-md-3">
     <strong>Short Name: </strong>
     <p>
       <%= project.short_name %>
     </p>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <strong>Start Date: </strong>
     <p>
       <%= project.start_date %>
     </p>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <strong>End Date: </strong>
     <p>
       <%= project.end_date %>
