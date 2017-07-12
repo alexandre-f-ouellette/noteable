@@ -3,5 +3,7 @@
 
   <%= render 'form', project: @project %>
 
-  <%= link_to 'Back', projects_path %>
+  <%= link_to projects_path, :class => "btn btn-info btn-md" do %>
+    <span class="glyphicon glyphicon-chevron-left"></span> Back
+  <% end %>
 </div>
