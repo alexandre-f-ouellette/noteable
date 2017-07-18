@@ -5,7 +5,14 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @q = Project.ransack(params[:q])
-    @projects = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 9)
+
+    if params[:q]
+      @projects = @q.result(distinct: true)
+    else
+      @projects = Project.where(archived: false)
+    end
+
+    @projects = @projects.paginate(:page => params[:page], :per_page => 9)
   end
 
   # GET /projects/1
